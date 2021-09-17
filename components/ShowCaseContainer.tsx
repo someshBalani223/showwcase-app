@@ -15,13 +15,13 @@ const ShowCaseContainer: React.FC<Props> = ({ universityData = [] }) => {
           .slice(0)
           .reverse()
           .map((value: any, i: any) => (
-            <>
-              <h4 key={i}>{`${value.schoolName} @ ShowCase University`}</h4>
+            <React.Fragment key={i}>
+              <h4>{`${value.schoolName} @ ShowCase University`}</h4>
               <div>{`${getMonthAndYear(value.startYear)} - ${getMonthAndYear(value.endYear)}`}</div>
               <ul>
                 <li>{value.description}</li>
               </ul>
-            </>
+            </React.Fragment>
           ))}
       </>
     </BoxContainer>
