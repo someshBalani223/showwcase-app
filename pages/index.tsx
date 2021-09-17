@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import SearchInput from "../components/SearchInput";
 import { getApiSuggestions } from "../services/service";
@@ -26,6 +26,11 @@ const Home: NextPage = () => {
     setname(url.name);
     setOptions([]);
   };
+  
+  useEffect(() => {
+    localStorage.clear();
+  }, [])
+
   return (
     <Container>
       Hi there ! Welcome to your education showcase
