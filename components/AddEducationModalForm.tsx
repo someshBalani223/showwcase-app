@@ -1,8 +1,12 @@
-import React, { useState, useCallback } from "react";
-
 import debounce from "lodash/debounce";
+import React, { useCallback,useState } from "react";
+
+import SearchInput from "../components/SearchInput";
+import { useGetUniversitiesHook } from "../customHooks/university";
+import { Education } from "../interfaces";
 import {
   Button,
+  ButtonDiv,
   CustomModalstyle,
   Div,
   ErrorMessage,
@@ -10,11 +14,8 @@ import {
   Label,
   OverlayModal,
 } from "../styles/addEducationModalForm.styled";
-import { getDate } from "../utils";
 import { Input } from "../styles/common.styled";
-import { Education } from "../interfaces";
-import { useGetUniversitiesHook } from "../customHooks/university";
-import SearchInput from "../components/SearchInput";
+import { getDate } from "../utils";
 
 interface Props {
   onSubmit: (education: Education) => void;
@@ -41,6 +42,7 @@ const AddEducationModalForm: React.FC<Props> = ({ onSubmit, isOpen, closeModal }
   const endDate = getDate(endYear);
   const { loading, universities, searchUniversity, clearUniversity } = useGetUniversitiesHook();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSave = useCallback(debounce((value) => getUniversitySuggestions(value), 500), []);
 
   const getUniversitySuggestions = async (text: string) => {
@@ -69,11 +71,13 @@ const AddEducationModalForm: React.FC<Props> = ({ onSubmit, isOpen, closeModal }
     addEducationDetail({ ...education, schoolName: university });
     clearUniversity();
   }
-  
+
   return (
     <Div>
       <CustomModalstyle
         isOpen={isOpen}
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         style={OverlayModal}
         ariaHideApp={false}
         onRequestClose={closeModal}
@@ -176,7 +180,9 @@ const AddEducationModalForm: React.FC<Props> = ({ onSubmit, isOpen, closeModal }
               )}
             </div>
           </div>
-          <Button type="submit">Save</Button>
+          <ButtonDiv>
+            <Button type="submit">Save</Button>
+          </ButtonDiv>
         </Form>
       </CustomModalstyle>
     </Div>

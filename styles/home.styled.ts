@@ -22,3 +22,15 @@ export const Button = styled.button`
   margin: 30px 2px;
   cursor: pointer;
 `;
+
+export const Input = styled.input`
+  width: 27%;
+  height: 40px;
+  box-shadow: 1px 2px;
+`;
+
+export const InputBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

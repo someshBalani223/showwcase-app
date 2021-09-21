@@ -1,41 +1,45 @@
 import Modal from "react-modal";
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Form = styled.form`
   text-align: center;
-  margin:80px;
-  font-size:18px;
+  margin: 80px;
+  font-size: 18px;
 `;
 
 export const Label = styled.label`
-  margin-top:15px;
-  float:left;
-`
+  margin-top: 15px;
+  float: left;
+`;
 
+export const ButtonDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
-export const Div=styled.div`
+export const Div = styled.div`
   max-width: 50px;
 `;
 
 export const CustomModalstyle = styled(Modal)`
   width: 50%;
   background: white;
-  padding:5px;
+  padding: 5px;
   margin: auto;
   margin-top: 4%;
   text-align: center;
   form {
-    padding:5%;
-    margin-top:50px;
+    padding: 5%;
+    margin-top: 50px;
     font-size: 16px;
-    margin:auto;
-
+    margin: auto;
   }
-  form .row{
-    display:flex;
+  form .row {
+    display: flex;
   }
-  .item{
-    margin:0px 10px;
+  .item {
+    margin: 0px 10px;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -45,12 +49,12 @@ export const CustomModalstyle = styled(Modal)`
 
 export const OverlayModal = {
   overlay: {
-    position: 'fixed',
+    position: "fixed",
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    background:  "rgba(128, 128, 128, 0.7)",
+    background: "rgba(128, 128, 128, 0.7)",
   },
 };
 
@@ -68,7 +72,7 @@ export const Button = styled.button`
   border: none;
   color: black;
   padding: 18px 25px;
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
   margin-top: 50px;
   margin-left: 90%;

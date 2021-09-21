@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useMemo,useState } from "react";
 
 import AddEducationModalForm from "../components/AddEducationModalForm";
-import { EducationButton } from "../styles/addEducationModalForm.styled";
 import { Education } from "../interfaces";
-import { BoxContainer, SidePanel, H5, Container, Text } from "../styles/common.styled";
-import { getMonthAndYear } from "../utils";
+import { EducationButton } from "../styles/addEducationModalForm.styled";
+import { BoxContainer, Container, H5, SidePanel, Text } from "../styles/common.styled";
+import { getCurrentDate, getMonthAndYear, getSortData } from "../utils";
 
 const EducationDetails: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,7 +31,11 @@ const EducationDetails: React.FC = () => {
   }
 
   const router = useRouter();
+  const sortedData = useMemo(() => {
+    return getSortData(educations);
+  }, [educations]);
 
+  console.log(sortedData);
   return (
     <div>
       <Container>
@@ -50,15 +54,15 @@ const EducationDetails: React.FC = () => {
       <SidePanel>
         <H5>Showcase University</H5>
         <ul>
-          {educations.slice(0).reverse().map((education) => (<li key={education.id}>{education.schoolName}</li>))}
+          {educations.map((education) => (<li key={education.id}>{education.schoolName}</li>))}
         </ul>
       </SidePanel>
       <BoxContainer>
       <>
-        {educations.slice(0).reverse().map((education) => (
+        {educations.map((education) => (
             <React.Fragment key={education.id}>
               <h4>{`${education.schoolName} @ ShowCase University`}</h4>
-              <div>{`${getMonthAndYear(education.startYear)} - ${getMonthAndYear(education.endYear)}`}</div>
+              <div>{`${getMonthAndYear(education.startYear)} - ${getCurrentDate(education.endYear)}`}</div>
               <ul>
                 <li>{education.description}</li>
               </ul>

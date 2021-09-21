@@ -1,9 +1,8 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Input } from "../styles/searchInput.styled";
 
-import { Button, Container, Text } from "../styles/home.styled";
+import { Button, Container, Input, InputBox, Text } from "../styles/home.styled";
 
 const Home: NextPage = () => {
   const [name, setName] = useState("");
@@ -20,13 +19,15 @@ const Home: NextPage = () => {
     <Container>
       Hi there ! Welcome to your education showcase
       <Text>Type your name and click Enter below to begin!</Text>
-      <Input
-        onChange={handleInputChange}
-        value={name}
-        placeholder="Your Name"
-      />
+      <InputBox>
+        <Input
+          onChange={handleInputChange}
+          value={name}
+          placeholder="Your Name"
+        />
+      </InputBox>
       <br></br>
-      <Link href={`/EducationDetails?name=${name}`}>
+      <Link href={`/EducationDetails?name=${name}`} passHref={true}>
         <Button>Enter</Button>
       </Link>
     </Container>

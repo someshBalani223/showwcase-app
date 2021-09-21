@@ -5,11 +5,14 @@ export const SearchInputContainer = styled.div`
 `;
 
 export const SuggestionContainer = styled.div`
-  display: block;
+  display: flex;
   border: 1px solid #aaa;
   z-index: 2;
+  flex-direction: column;
   height: 150px;
   position: absolute;
+  margin-top: 83px;
+  width: 22%;
   background-color: #fff;
   overflow-y: auto;
 `;
