@@ -6,10 +6,12 @@ export const Form=styled.form`
     margin:80px;
     font-size:18px;
 `;
+
 export const Label=styled.label`
     margin-top:15px;
     float:left;
 `
+
 export const Input=styled.input`
     margin-top: 10px;
     margin-bottom: 10px;
@@ -23,6 +25,7 @@ export const Input=styled.input`
 export const Div=styled.div`
   max-width: 50px;
 `;
+
 export const CustomModalstyle = styled(Modal)`
   width: 50%;
   background: white;
@@ -68,6 +71,7 @@ export const EducationButton = styled.button`
   font-size: 15px;
   cursor: pointer;
 `;
+
 export const Button = styled.button`
   background-color: grey;
   border: none;

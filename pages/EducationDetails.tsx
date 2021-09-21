@@ -1,51 +1,69 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-import ModalComponent from "../components/ModalComponent";
-import ShowCaseContainer from "../components/ShowCaseContainer";
-import ShowCasePanel from "../components/ShowCasePanel";
-import { Container, Text } from "../styles/educationdetails.styled";
+import AddEducationModalForm from "../components/AddEducationModalForm";
+import { EducationButton } from "../styles/addEducationModalForm.styled";
+import { Education } from "../interfaces";
+import { BoxContainer, SidePanel, H5, Container, Text } from "../styles/common.styled";
+import { getMonthAndYear } from "../utils";
 
 const EducationDetails: React.FC = () => {
-  const [click, setClick] = useState(false);
-  const [state, setState] = useState({});
-  const [universityData, setUniversityData] = useState([]);
-  const [data, setData] = useState<any[]>([]);
-  const handleChange = (e: any) => {
-    setState({ ...state, [e.target.name]: e.target.value });
+  const [isOpen, setIsOpen] = useState(false);
+  const [educations, setEducations] = useState<Education[]>([]);
+
+  const showAddEducationModalForm = () => {
+    setIsOpen(true);
   };
-  const isOpen = () => {
-    setClick(true);
-  };
-  const handleClick = (e: any) => {
-    e.preventDefault();
-    setData([...data, state]);
-    localStorage.setItem("educationData", JSON.stringify([...universityData, state]));
-    setClick(false);
+  
+  const addNewEducation = (education: Education) => {
+    setEducations([
+      ...educations,
+      { 
+        ...education,
+        id: Date.now().toString(),
+      },
+    ]);
+    setIsOpen(false);
   };
 
+  const closeModal = () => {
+    setIsOpen(false);
+  }
+
   const router = useRouter();
-  useEffect(() => {
-    if (localStorage) {
-      setUniversityData(JSON.parse(localStorage.getItem("educationData") || '[]'));
-    }
-  }, [data]);
 
   return (
     <div>
       <Container>
         <Text>{`Welcome to ${router.query.name}'s education page.`}</Text>
-        <ModalComponent
-          click={click}
-          data={data}
-          handleChange={handleChange}
+        <EducationButton onClick={showAddEducationModalForm}>
+          Add new education
+        </EducationButton>
+        <AddEducationModalForm
+          onSubmit={addNewEducation}
           isOpen={isOpen}
-          handleClick={handleClick}
+          closeModal={closeModal}
         />
       </Container>
-      <ShowCasePanel universityData={universityData} />
-      <ShowCaseContainer universityData={universityData} />
+      <SidePanel>
+        <H5>Showcase University</H5>
+        <ul>
+          {educations.map((education) => (<li key={education.id}>{education.schoolName}</li>))}
+        </ul>
+      </SidePanel>
+      <BoxContainer>
+      <>
+        {educations.map((education) => (
+            <React.Fragment key={education.id}>
+              <h4>{`${education.schoolName} @ ShowCase University`}</h4>
+              <div>{`${getMonthAndYear(education.startYear)} - ${getMonthAndYear(education.endYear)}`}</div>
+              <ul>
+                <li>{education.description}</li>
+              </ul>
+            </React.Fragment>
+          ))}
+      </>
+    </BoxContainer>
     </div>
   );
 };

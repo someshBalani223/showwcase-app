@@ -14,5 +14,5 @@ export const getMonthAndYear = (input: string) => {
     "December",
   ];
   const date = new Date(input);
-  return monthNames[date.getMonth()] + ' '  + date.getFullYear();
+  return `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
 };

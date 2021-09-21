@@ -7,9 +7,11 @@ export const Container = styled.div`
   text-align: center;
   margin-top: 11%;
 `;
+
 export const Text = styled.p`
   margin-top: 8%;
 `;
+
 export const Button = styled.button`
   background-color: grey;
   border: none;

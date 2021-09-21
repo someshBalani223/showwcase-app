@@ -1,7 +1,7 @@
 import _, { debounce } from "lodash";
 import React, { useCallback, useState } from "react";
 
-import { Input, Loading,Suggestion } from "../styles/styled.searchinput";
+import { Input, Loading,Suggestion } from "../styles/searchInput.styled";
 
 interface Props {
   loading: boolean;
@@ -11,6 +11,7 @@ interface Props {
   onClickFunction: (url: string) => void;
   placeholder: string;
 }
+
 const SearchInput = ({
   loading,
   options,
