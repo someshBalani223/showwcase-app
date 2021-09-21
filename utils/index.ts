@@ -1,3 +1,5 @@
+import { Education } from "../interfaces";
+
 export const getMonthAndYear = (input: string) => {
   const monthNames = [
     "January",
@@ -31,6 +33,6 @@ export const getCurrentDate = (date: string) => {
   return getMonthAndYear(date)
 }
 
-export const getSortData = (data: any) => {
-  return data.sort((a: any,b: any) => getDate(b.startYear).valueOf() - getDate(a.startYear).valueOf());
+export const getSortData = (data: Education[]) => {
+  return data.sort((a: Education, b: Education) => getDate(b.startYear).valueOf() - getDate(a.startYear).valueOf());
 }

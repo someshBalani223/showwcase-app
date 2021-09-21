@@ -25,7 +25,7 @@ const Home: NextPage = () => {
     setName(e.target.value);
   };
 
-  const handleClick = (e: any) => {
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     if(!name) {
       setError(true);
