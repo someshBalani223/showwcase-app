@@ -39,11 +39,13 @@ const EducationDetails: React.FC = () => {
         <EducationButton onClick={showAddEducationModalForm}>
           Add new education
         </EducationButton>
-        <AddEducationModalForm
-          onSubmit={addNewEducation}
-          isOpen={isOpen}
-          closeModal={closeModal}
-        />
+        {isOpen && (
+          <AddEducationModalForm
+            onSubmit={addNewEducation}
+            isOpen={isOpen}
+            closeModal={closeModal}
+          />
+        )}
       </Container>
       <SidePanel>
         <H5>Showcase University</H5>
