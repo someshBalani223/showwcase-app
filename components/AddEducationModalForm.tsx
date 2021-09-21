@@ -1,14 +1,17 @@
 import React, { useState } from "react";
+
+import { Education } from "../interfaces";
 import {
   Button,
   CustomModalstyle,
   Div,
+  ErrorMessage,
   Form,
   Input,
   Label,
   OverlayModal,
 } from "../styles/addEducationModalForm.styled";
-import { Education } from "../interfaces";
+import { getDate } from "../utils";
 
 interface Props {
   onSubmit: (education: Education) => void;
@@ -17,17 +20,26 @@ interface Props {
 }
 
 const initialData = {
-  id: '',
-  schoolName: '',
-  degree: '',
-  startYear: '',
-  endYear: '',
-  grade: '',
-  description: '',
-}
+  id: "",
+  schoolName: "",
+  degree: "",
+  startYear: "",
+  endYear: "",
+  grade: "",
+  description: "",
+};
 
-const AddEducationModalForm: React.FC<Props> = ({ onSubmit, isOpen, closeModal }) => {
+const AddEducationModalForm: React.FC<Props> = ({
+  onSubmit,
+  isOpen,
+  closeModal,
+}) => {
   const [education, addEducationDetail] = useState<Education>(initialData);
+  const [error, setError] = useState(false);
+  const { schoolName, degree, description, startYear, endYear, grade } =
+    education;
+  const startDate = getDate(startYear);
+  const endDate = getDate(endYear);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     addEducationDetail({
@@ -38,8 +50,12 @@ const AddEducationModalForm: React.FC<Props> = ({ onSubmit, isOpen, closeModal }
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    onSubmit(education);
-  }
+    if(!schoolName || !degree || !description  || !startYear || !endYear || !grade || startDate >= endDate) {
+      setError(true);
+    } else {
+      onSubmit(education);
+    }
+  };
   
   return (
     <Div>
@@ -60,6 +76,11 @@ const AddEducationModalForm: React.FC<Props> = ({ onSubmit, isOpen, closeModal }
                 name="schoolName"
                 onChange={handleChange}
               />
+              {!schoolName && error && (
+                <ErrorMessage>
+                  University name is required
+                </ErrorMessage>
+              )}
             </div>
             <div className="item">
               <Label>Degree:</Label>
@@ -69,6 +90,11 @@ const AddEducationModalForm: React.FC<Props> = ({ onSubmit, isOpen, closeModal }
                 name="degree"
                 onChange={handleChange}
               />
+              {!degree && error && (
+                <ErrorMessage>
+                  Degree is required
+                </ErrorMessage>
+              )}
             </div>
           </div>
           <div className="row">
@@ -80,6 +106,11 @@ const AddEducationModalForm: React.FC<Props> = ({ onSubmit, isOpen, closeModal }
                 name="startYear"
                 onChange={handleChange}
               />
+              {!startYear && error && (
+                <ErrorMessage>
+                  Start Year is required
+                </ErrorMessage>
+              )}
             </div>
             <div className="item">
               <Label>End year:</Label>
@@ -89,6 +120,16 @@ const AddEducationModalForm: React.FC<Props> = ({ onSubmit, isOpen, closeModal }
                 name="endYear"
                 onChange={handleChange}
               />
+              {!endYear && error && (
+                <ErrorMessage>
+                  End Year is required
+                </ErrorMessage>
+              )}
+              {startDate >= endDate && error && (
+                <ErrorMessage>
+                  Please enter correct End date
+                </ErrorMessage>
+              )}
             </div>
           </div>
           <div className="row">
@@ -100,6 +141,11 @@ const AddEducationModalForm: React.FC<Props> = ({ onSubmit, isOpen, closeModal }
                 name="grade"
                 onChange={handleChange}
               />
+              {!grade && error && (
+                <ErrorMessage>
+                  Grade is required
+                </ErrorMessage>
+              )}
             </div>
             <div className="item">
               <Label>Description:</Label>
@@ -109,6 +155,11 @@ const AddEducationModalForm: React.FC<Props> = ({ onSubmit, isOpen, closeModal }
                 name="description"
                 onChange={handleChange}
               />
+              {!description && error && (
+                <ErrorMessage>
+                  Description is required
+                </ErrorMessage>
+              )}
             </div>
           </div>
           <Button type="submit">Save</Button>

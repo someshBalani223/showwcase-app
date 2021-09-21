@@ -16,3 +16,7 @@ export const getMonthAndYear = (input: string) => {
   const date = new Date(input);
   return `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
 };
+
+export const getDate = (input: string) => {
+  return new Date(input);
+};

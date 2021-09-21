@@ -82,3 +82,8 @@ export const Button = styled.button`
   margin-top: 50px;
   margin-left: 90%;
 `;
+
+export const ErrorMessage = styled.span`
+  color: red;
+  font-size: 12px;
+`;

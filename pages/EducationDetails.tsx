@@ -48,12 +48,12 @@ const EducationDetails: React.FC = () => {
       <SidePanel>
         <H5>Showcase University</H5>
         <ul>
-          {educations.map((education) => (<li key={education.id}>{education.schoolName}</li>))}
+          {educations.slice(0).reverse().map((education) => (<li key={education.id}>{education.schoolName}</li>))}
         </ul>
       </SidePanel>
       <BoxContainer>
       <>
-        {educations.map((education) => (
+        {educations.slice(0).reverse().map((education) => (
             <React.Fragment key={education.id}>
               <h4>{`${education.schoolName} @ ShowCase University`}</h4>
               <div>{`${getMonthAndYear(education.startYear)} - ${getMonthAndYear(education.endYear)}`}</div>
