@@ -1,26 +1,17 @@
 import Modal from "react-modal";
 import styled from 'styled-components';
 
-export const Form=styled.form`
-    text-align: center;
-    margin:80px;
-    font-size:18px;
+export const Form = styled.form`
+  text-align: center;
+  margin:80px;
+  font-size:18px;
 `;
 
-export const Label=styled.label`
-    margin-top:15px;
-    float:left;
+export const Label = styled.label`
+  margin-top:15px;
+  float:left;
 `
 
-export const Input=styled.input`
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    margin-left: 1px;
-    height: 30px;
-    width: 100%;
-    box-shadow: 3px 3px grey;
-`;
 
 export const Div=styled.div`
   max-width: 50px;

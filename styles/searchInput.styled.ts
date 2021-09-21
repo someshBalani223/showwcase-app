@@ -1,21 +1,26 @@
 import styled from "styled-components";
 
-export const Input = styled.input`
-  width: 27%;
-  height: 40px;
-  box-shadow: 1px 2px;
+export const SearchInputContainer = styled.div`
+  position: relative;
 `;
 
-export const Suggestion = styled.div`
+export const SuggestionContainer = styled.div`
+  display: block;
+  border: 1px solid #aaa;
+  z-index: 2;
+  height: 150px;
+  position: absolute;
+  background-color: #fff;
+  overflow-y: auto;
+`;
+
+export const SuggestionOption = styled.div`
   display: block;
   border: 1px solid #aaa;
   background-color: #fff,
   font-size: 85px;
   borderBottomLeftRadius: 4;
   borderBottomRightRadius: 4;
-  z-index: 2;
-  width: 27%;
-  margin-left: 36%;
   cursor: pointer;
   font-size: 15px;
   &:hover {

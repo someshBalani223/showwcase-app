@@ -43,3 +43,13 @@ export const H5=styled.h5`
   text-align:center;
   margin-top:1px;
 `
+
+export const Input=styled.input`
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  margin-left: 1px;
+  height: 30px;
+  width: 100%;
+  box-shadow: 3px 3px grey;
+`;

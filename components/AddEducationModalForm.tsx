@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 
-import { Education } from "../interfaces";
+import debounce from "lodash/debounce";
 import {
   Button,
   CustomModalstyle,
   Div,
   ErrorMessage,
   Form,
-  Input,
   Label,
   OverlayModal,
 } from "../styles/addEducationModalForm.styled";
 import { getDate } from "../utils";
+import { Input } from "../styles/common.styled";
+import { Education } from "../interfaces";
+import { useGetUniversitiesHook } from "../customHooks/university";
+import SearchInput from "../components/SearchInput";
 
 interface Props {
   onSubmit: (education: Education) => void;
@@ -29,17 +32,22 @@ const initialData = {
   description: "",
 };
 
-const AddEducationModalForm: React.FC<Props> = ({
-  onSubmit,
-  isOpen,
-  closeModal,
-}) => {
+const AddEducationModalForm: React.FC<Props> = ({ onSubmit, isOpen, closeModal }) => {
   const [education, addEducationDetail] = useState<Education>(initialData);
   const [error, setError] = useState(false);
   const { schoolName, degree, description, startYear, endYear, grade } =
     education;
   const startDate = getDate(startYear);
   const endDate = getDate(endYear);
+  const { loading, universities, searchUniversity, clearUniversity } = useGetUniversitiesHook();
+
+  const debouncedSave = useCallback(debounce((value) => getUniversitySuggestions(value), 500), []);
+
+  const getUniversitySuggestions = async (text: string) => {
+    if (text && text.trim().length > 0) {
+      searchUniversity(text);
+    }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     addEducationDetail({
@@ -56,6 +64,11 @@ const AddEducationModalForm: React.FC<Props> = ({
       onSubmit(education);
     }
   };
+
+  const universitySelected = (university: string) => {
+    addEducationDetail({ ...education, schoolName: university });
+    clearUniversity();
+  }
   
   return (
     <Div>
@@ -70,11 +83,12 @@ const AddEducationModalForm: React.FC<Props> = ({
           <div className="row">
             <div className="item">
               <Label>University name:</Label>
-              <Input
-                type="text"
-                placeholder="school name"
-                name="schoolName"
-                onChange={handleChange}
+              <SearchInput 
+                loading={loading}
+                options={universities}
+                onChange={debouncedSave}
+                onSelection={universitySelected}
+                placeholder="University Name"
               />
               {!schoolName && error && (
                 <ErrorMessage>
