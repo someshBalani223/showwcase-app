@@ -53,3 +53,10 @@ export const Input=styled.input`
   width: 100%;
   box-shadow: 3px 3px grey;
 `;
+
+export const ErrorMessage = styled.span`
+  color: red;
+  font-size: 12px;
+  display: block;
+  margin-top: 5px;
+`;

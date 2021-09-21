@@ -27,10 +27,13 @@ export const Input = styled.input`
   width: 27%;
   height: 40px;
   box-shadow: 1px 2px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const InputBox = styled.div`
-  display: flex;
   align-items: center;
   justify-content: center;
 `;
